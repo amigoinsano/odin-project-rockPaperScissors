@@ -3,85 +3,38 @@
 
 <head>
     <meta charset="utf-8">
-    <title>The Odin Project - JavaScript Basics - Rock Paper Scissors</title>
+    <title>The Odin Project - DOM Manipulation - Rock Paper Scissors</title>
     <meta name="author" content="">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Bebas+Neue|Roboto&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <script>
-        function computerPlay() {
-            let randomNum = randomNumber();
-            let choice = (randomNum === 1) ? "rock" : (randomNum === 2) ? "paper" : "scissors";
-            return choice;
-        }
-
-        function randomNumber() {
-            return Math.floor(Math.random() * 3) + 1;
-        }
-
-        function playRound(playerSelection, computerSelection) {
-            playerSelection = playerSelection.toLowerCase();
-            computerSelection = computerSelection.toLowerCase();
-            if (playerSelection === computerSelection) {
-                return "draw";
-            }
-            if (playerSelection === "rock") {
-                if (computerSelection === "paper") {
-                    return "lose";
-                } else {
-                    return "win";
-                }
-            } else if (playerSelection === "paper") {
-                if (computerSelection === "scissors") {
-                    return "lose";
-                } else {
-                    return "win";
-                }
-            } else if (playerSelection === "scissors") {
-                if (computerSelection === "rock") {
-                    return "lose";
-                } else {
-                    return "win";
-                }
-            } else {
-                return "Please enter rock, paper or scissors.";
-            }
-
-        }
-
-        function createResultText(result, playerSelection, computerSelection) {
-            playerSelection = playerSelection.replace(playerSelection.charAt(0), playerSelection.charAt(0).toUpperCase());
-            computerSelection = computerSelection.replace(computerSelection.charAt(0), computerSelection.charAt(0).toUpperCase());
-            if (result === "win") {
-                return "You win! " + playerSelection + " beats " + computerSelection + ".";
-            } else {
-                return "You lose! " + computerSelection + " beats " + playerSelection + ".";
-            }
-        }
-
-        function playGame() {
-            let playerScore = 0, computerScore = 0;
-            let playerSelection, computerSelection;
-            let result;
-            for (i = 0; i < 5; i++) {
-                playerSelection = prompt("Enter rock, paper or scissors");
-                computerSelection = computerPlay();
-                result = playRound(playerSelection, computerSelection);
-                (result === "win") ? (
-                    console.log(createResultText("win",playerSelection, computerSelection)),
-                    playerScore++
-                ) : (result === "lose") ? (
-                    console.log(createResultText("lose",playerSelection, computerSelection)),
-                    computerScore++
-                ) : console.log("Draw!");
-            }
-            console.log((playerScore>computerScore)?"Player won. \nPlayer: " + playerScore + "\nComputer: " + computerScore: 
-            "Computer won. \nPlayer: " + playerScore + "\nComputer: " + computerScore)
-        }
-    </script>
+    <div id="container">
+        <div id="play-area">
+            <div id="rock">
+                <input type="image" src="rock.png" id="rock" class="playbutton">
+            </div>
+            <div id="paper">
+                <input type="image" src="paper.png" id="paper" class="playbutton">
+            </div>
+            <div id="scissors">
+                <input type="image" src="scissors.png" id="scissors" class="playbutton">
+            </div>
+        </div>
+        <div id="result">
+            Click one of the buttons to play a round!
+        </div>
+        <div id="score"></div>
+        <div id="resetButton"></div>
+        <div id="footer">
+            <a href="https://www.vecteezy.com/free-vector/rock-paper-scissors">Rock Paper Scissors Vectors by
+                Vecteezy</a>
+        </div>
+    </div>
+    <script src="game.js"></script>
 </body>
 
 </html>
