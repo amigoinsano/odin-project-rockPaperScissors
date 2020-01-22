@@ -48,39 +48,44 @@ function createResultText(result, playerSelection, computerSelection) {
     }
 }
 
-function createResetButton(){
+function createResetButton() {
     const resetButton = document.createElement("button");
     resetButton.innerHTML = "Reset the Game";
     resetButton.addEventListener("click", resetGame);
     resetButton.setAttribute("id", "resetbutton");
-    resetButton.toggleAttribute("resetButton");
     return resetButton;
 }
 
-function resetGame(){
+function resetGame() {
     playerPoints = 0;
     computerPoints = 0;
     resultArea.textContent = "Click one of the buttons to play a round!";
     scoreArea.textContent = "";
-    scoreArea.removeChild(document.getElementById("resetbutton"));
+    gameOver = false;
+    resetButtonArea.removeChild(document.getElementById("resetbutton"));
 }
 
 function playGame(playerSelection, computerSelection) {
     const result = playRound(playerSelection, computerSelection);
     resultArea.textContent = result;
-    if (playerPoints >= 5) {
-        scoreArea.textContent = "Congratulations! You won!";
-        resetButtonArea.append(createResetButton());
-    } else if (computerPoints >= 5) {
-        scoreArea.textContent = "The computer won :(";
-        resetButtonArea.append(createResetButton());
-    } else { 
-        scoreArea.textContent = "Player: " + playerPoints + " - " + computerPoints + " :Computer"; 
+    if (gameOver === false) {
+        if (playerPoints >= 5) {
+            scoreArea.textContent = "Congratulations! You won!";
+            resetButtonArea.append(createResetButton());
+            gameOver = true;
+        } else if (computerPoints >= 5) {
+            scoreArea.textContent = "The computer won :(";
+            resetButtonArea.append(createResetButton());
+            gameOver = true;
+        } else {
+            scoreArea.textContent = "Player: " + playerPoints + " - " + computerPoints + " :Computer";
+        }
     }
 }
 
 let playerPoints = 0;
 let computerPoints = 0;
+let gameOver = false;
 const resultArea = document.querySelector("#result");
 const scoreArea = document.querySelector("#score");
 const resetButtonArea = document.querySelector("#resetButton");
